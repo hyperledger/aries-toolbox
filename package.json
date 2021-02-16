@@ -59,7 +59,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.1.0",
-    "dompurify": "^2.0.8",
+    "dompurify": "^2.0.17",
     "element-ui": "^2.10.1",
     "encryption-envelope-js": "1.1.4",
     "marked": "^0.8.0",
