@@ -9,9 +9,9 @@
       @schema-refresh="fetch_schemas"></schema-list>
     <cred-def-list
       title="Credential Definitions"
-      :retrievable="false"
       :can_create="true"
-      :list="issuer_cred_defs"
+      :retrievable="true"
+      :list="cred_defs"
       @cred-def-refresh="fetch_cred_defs"></cred-def-list>
     <issued-cred-list
       title="Issued Credentials"
@@ -129,8 +129,7 @@ export default {
     this.$message_bus.$emit('entered_taa_required_module');
     await this.ready()
     this.fetch_schemas();
-    // CredDefList will fetch
-    //this.fetch_cred_defs();
+    this.fetch_cred_defs();
     this.fetch_issued_credentials();
     this.fetch_connections();
   },
