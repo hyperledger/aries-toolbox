@@ -47,7 +47,8 @@ export const metadata = {
     group: 'Agent to Agent',
     priority: 80,
     required_protocols: [
-      'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-ledgers/0.1'
+      {'https' : 'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-ledgers/0.1'},
+      {'did:sov' : 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-ledgers/0.1'}
     ]
   }
 };
@@ -90,7 +91,7 @@ export default {
   created: function() {
     let component = this; // Safe rerefence to this
     this.$message_bus.$on(
-      'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1/invitation',
+      'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-connections/0.1/invitation',
       msg => component.fetchAgentInvitations()
     );
     this.$message_bus.$on('invitations', () => component.fetchAgentInvitations());

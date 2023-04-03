@@ -55,7 +55,8 @@ export const metadata = {
     group: 'Toolbox to Agent',
     priority: 20,
     required_protocols: [
-      'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0'
+      {'did:sov' : 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0'},
+      {'https': 'https://github.com/hyperledger/aries-toolbox/tree/master/docs/basicmessage/1.0'}
     ]
   }
 };
@@ -71,8 +72,15 @@ export const shared = {
         'direction': 'Received'
       });
     },
+    'https://github.com/hyperledger/aries-toolbox/tree/master/docs/basicmessage/1.0/message': (share, msg) => {
+      share.basicmessages.push({
+        'msg': msg,
+        'direction': 'Received'
+      });
+    },
     'send-message': (share, msg) => {
-      if (msg['@type'] === 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/message') {
+      if (msg['@type'] === 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/message' 
+      || 'https://github.com/hyperledger/aries-toolbox/tree/master/docs/basicmessage/1.0/message') {
         share.basicmessages.push({
           'msg': msg,
           'direction': 'Sent'

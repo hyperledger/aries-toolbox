@@ -54,6 +54,7 @@ import message_bus from '@/message_bus.js';
 import share, { share_source } from '@/share.js';
 import components, { shared } from './components.js';
 import Taa from './TAA.vue';
+import DidList from './Dids/DidList.vue';
 
 
 //handle crashes and kill events
@@ -121,6 +122,21 @@ export default {
               duration: 4000,
               customClass: 'problem-report-notification'
             })
+          }, // if (startsWith('did:sov' || 'https://') && (endsWith('notification/1.0/problem-report')))
+        'https://github.com/hyperledger/aries-toolbox/tree/master/docs/notification/1.0/problem-report':
+          (vm, msg) => {
+            vm.$notify.error({
+              title: 'Small problem...',
+              message: (text => {
+                if (text.length > 30) {
+                  return text.slice(0, 30).trim() + '...';
+                }
+                return text;
+              })(msg["explain-ltxt"] || msg['description']['en']),
+              onClick: () => vm.redirect('message-history'),
+              duration: 4000,
+              customClass: 'problem-report-notification'
+            })
           },
         'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/coordinate-mediation/1.0/mediate-grant': (vm, msg) => {
           vm.enable_as_mediator(msg);
@@ -165,16 +181,18 @@ export default {
     matching_modules_grouped: function () {
       // This computed attribute updates when the supported protocol list is updated.
       let pid_list = this.protocols.map(p => p.pid);
-      let filtered_list = module_list.filter(function (m) {
-        return m.required_protocols.every(req_protocol => pid_list.includes(req_protocol));
-      });
-      //group modules
-      let module_groups = filtered_list.reduce(function (r, m) {
-        r[m.group] = r[m.group] || [];
-        r[m.group].push(m);
-        return r;
-      }, Object.create(null));
-      return module_groups;
+      if (function (m) {m.required_protocols} instanceof Array(JSON)) {
+        let filtered_list = module_list.filter(function (m) {
+          return m.required_protocols.every(req_protocol => pid_list.includes(...Object.values(req_protocol)));
+        });
+        //group modules
+        let module_groups = filtered_list.reduce(function (r, m) {
+          r[m.group] = r[m.group] || [];
+          r[m.group].push(m);
+          return r;
+        }, Object.create(null));
+        return module_groups;
+      }
     }
 
   },

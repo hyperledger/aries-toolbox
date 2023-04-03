@@ -44,6 +44,8 @@ export const shared = {
   listeners: {
     "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/disclose":
     (share, msg) => share.protocols = msg.protocols,
+    "https://github.com/hyperledger/aries-toolbox/tree/master/docs/discover-features/1.0/disclose":
+    (share, msg) => share.protocols = msg.protocols,
   },
   methods: {
     fetch_protocols: ({send}) => {

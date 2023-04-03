@@ -132,7 +132,10 @@ export const metadata = {
     icon: 'el-icon-location-outline',
     group: 'Agent to Agent',
     priority: 55,
-    required_protocols: [ PROTOCOL ]
+    required_protocols: [
+    {'https' : 'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-routing/0.1'},
+    {'did:sov' : 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-routing/0.1'}
+    ]
   }
 };
 
@@ -142,10 +145,16 @@ export const shared = {
     mediators: []
   },
   listeners: {
-    [`${PROTOCOL}/routes`]: (share, msg) => {
+    ['https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-routing/0.1/routes']: (share, msg) => {
       share.routes = msg.routes;
     },
-    [`${PROTOCOL}/mediation-requests`]: (share, msg) => {
+    ['did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-routing/0.1/routes']: (share, msg) => {
+      share.routes = msg.routes;
+    },
+    ['https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-routing/0.1/mediation-requests']: (share, msg) => {
+      share.mediators = msg.requests;
+    },
+    ['did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-routing/0.1/mediation-requests']: (share, msg) => {
       share.mediators = msg.requests;
     }
   },

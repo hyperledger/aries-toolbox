@@ -177,7 +177,8 @@ export const metadata = {
     group: 'Agent to Agent',
     priority: 10,
     required_protocols: [
-      'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-payments/0.1'
+      {'https' : 'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-payments/0.1'},
+      {'did:sov' : 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-payments/0.1'}
     ]
   }
 };
@@ -190,7 +191,14 @@ export const shared = {
     'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-payments/0.1/address-list': (share, msg) => {
       share.payment_addresses = msg.addresses;
     },
+    'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-payments/0.1/address-list': (share, msg) => {
+      share.payment_addresses = msg.addresses;
+    },
     'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-payments/0.1/transfer-complete': (share, msg) => {
+      share.payment_transfer_complete_notify(msg.from_address, msg.to_address, msg.amount, msg.method);
+      share.fetch_payment_addresses()
+    },
+    'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-payments/0.1/transfer-complete': (share, msg) => {
       share.payment_transfer_complete_notify(msg.from_address, msg.to_address, msg.amount, msg.method);
       share.fetch_payment_addresses()
     }
@@ -220,7 +228,14 @@ export default {
       'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-payments/0.1/address': (v, msg) => {
         v.fetch_payment_addresses()
       },
+      'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-payments/0.1/address': (v, msg) => {
+        v.fetch_payment_addresses()
+      },
       'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-payments/0.1/fees': (v, msg) => {
+        v.transfer_form_fees = msg.total;
+        v.transfer_form_state = 'ready';
+      },
+      'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-payments/0.1/fees': (v, msg) => {
         v.transfer_form_fees = msg.total;
         v.transfer_form_state = 'ready';
       },

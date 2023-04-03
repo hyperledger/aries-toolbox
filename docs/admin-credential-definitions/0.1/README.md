@@ -18,7 +18,7 @@
 Create a credential definition based on a schema.
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-credential-definitions/0.1/send-credential-definition",
+    "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-credential-definitions/0.1/send-credential-definition",
     "schema_id": "5P4NvotLsVeeGd9UxUtMp6:2:Alice's Test Schema:1.0",
     "@id": "4e92857c-2b52-4e15-8e12-be695cb45ca5",
     "~transport": {
@@ -32,7 +32,7 @@ Create a credential definition based on a schema.
 Response to a `send-credential-definition` message.
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-credential-definitions/0.1/credential-definition-id",
+    "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-credential-definitions/0.1/credential-definition-id",
     "@id": "795932f4-dd26-4a9c-8b7e-e8c2302c9683",
     "~thread": {
         "thid": "4e92857c-2b52-4e15-8e12-be695cb45ca5"
@@ -47,7 +47,7 @@ Retrieve a pre-existing credential definition.
 
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-credential-definitions/0.1/credential-definition-get",
+    "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-credential-definitions/0.1/credential-definition-get",
     "cred_def_id": "K6fuxNHhNrR44RfkF5jRp7:3:CL:232915:Alice's Test Schema_1.0",
     "@id": "9c107592-1786-469a-9a24-eade00d5629f",
     "~transport": {
@@ -61,7 +61,7 @@ Retrieve a pre-existing credential definition.
 Respond message to a `credential-definition-get` message.
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-credential-definitions/0.1/credential-definition",
+    "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-credential-definitions/0.1/credential-definition",
     "@id": "0299d15e-9fb1-4e8d-884e-c1ed8e6e7c87",
     "~thread": {
         "thid": "9c107592-1786-469a-9a24-eade00d5629f"
@@ -86,7 +86,7 @@ Retrieve the list of credential definitions.
 
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-credential-definitions/0.1/credential-definition-get-list",
+    "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-credential-definitions/0.1/credential-definition-get-list",
     "@id": "33d0c436-558e-47b2-9a17-f66be8f869ca",
     "~transport": {
         "return_route": "all"
@@ -99,7 +99,7 @@ Respond to a `credential-definition-get-list` message.
 
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-credential-definitions/0.1/credential-definition-list",
+    "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-credential-definitions/0.1/credential-definition-list",
     "@id": "9d070822-821f-4f5c-821f-c92242dc4818",
     "~thread": {
         "thid": "33d0c436-558e-47b2-9a17-f66be8f869ca"

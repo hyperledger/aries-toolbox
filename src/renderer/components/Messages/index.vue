@@ -99,7 +99,8 @@ export const metadata = {
     group: 'Agent to Agent',
     priority: 45,
     required_protocols: [
-      protocol
+      {'https' : 'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-basicmessage/0.1'},
+      {'did:sov' : 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-basicmessage/0.1'}
     ]
   },
   message_types: {

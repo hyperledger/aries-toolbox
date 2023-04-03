@@ -24,7 +24,8 @@ export const metadata = {
     group: 'Agent to Agent',
     priority: 100,
     required_protocols: [
-      "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-issuer/0.1"
+      {'https' : 'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-issuer/0.1'},
+      {'did:sov' : 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-issuer/0.1'}
     ]
   }
 };
@@ -36,13 +37,17 @@ export const shared = {
   listeners: {
     "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-issuer/0.1/presentations-list":
     (share, msg) => share.issuer_presentations = msg.results,
+    "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-issuer/0.1/presentations-list":
+    (share, msg) => share.issuer_presentations = msg.results,
     "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-issuer/0.1/presentation-received":
+    (share, msg) => share.fetch_issuer_presentations(),
+    "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-issuer/0.1/presentation-received":
     (share, msg) => share.fetch_issuer_presentations()
   },
   methods: {
     fetch_issuer_presentations: ({send}) => {
       send({
-        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-issuer/0.1/presentations-get-list"
+        "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-issuer/0.1/presentations-get-list"
       })
     }
   }
@@ -57,7 +62,11 @@ export default {
   mixins: [
     message_bus({
       events: {
+        "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-issuer/0.1/presentation-exchange":
+        (v, msg) => setTimeout(v.fetch_issuer_presentations, 4500),
         "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-issuer/0.1/presentation-exchange":
+        (v, msg) => setTimeout(v.fetch_issuer_presentations, 4500),
+        "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-issuer/0.1/request-presentation":
         (v, msg) => setTimeout(v.fetch_issuer_presentations, 4500),
         "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-issuer/0.1/request-presentation":
         (v, msg) => setTimeout(v.fetch_issuer_presentations, 4500),
@@ -79,7 +88,7 @@ export default {
     async presentation_request(form){
       // response comes back in admin-issuer/0.1/presentation-exchange
       let query_msg = {
-        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-issuer/0.1/request-presentation",
+        "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-issuer/0.1/request-presentation",
         connection_id: form.connection_id,
         comment: form.comment,
         proof_request: {

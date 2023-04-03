@@ -50,7 +50,8 @@ export const metadata = {
     group: 'Agent to Agent',
     priority: 30,
     required_protocols: [
-      'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1'
+      {'did:sov' : 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1'},
+      {'https': 'https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-connections/0.1'}
     ]
   }
 };
@@ -80,9 +81,15 @@ export const shared = {
     }
   },
   listeners: {
+    "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-connections/0.1/connection-list":
+    (share, msg) => share.connections_old = msg.results,
     "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1/connection-list":
     (share, msg) => share.connections_old = msg.results,
+    "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-connections/0.1/connection":
+    (share, msg) => share.fetch_connections(),
     "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1/connection":
+    (share, msg) => share.fetch_connections(),
+    "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-connections/0.1/ack":
     (share, msg) => share.fetch_connections(),
     "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1/ack":
     (share, msg) => share.fetch_connections(),
@@ -90,7 +97,7 @@ export const shared = {
   methods: {
     fetch_connections: ({send}) => {
       send({
-        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1/connection-get-list",
+        "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-connections/0.1/connection-get-list",
       });
     }
   }
@@ -135,7 +142,7 @@ export default {
   methods: {
     update_connection: function(form) {
       let query_msg = {
-        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1/update",
+        "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-connections/0.1/update",
         "connection_id": form.connection_id,
         "label": form.label,
         "role": form.role,
@@ -144,14 +151,14 @@ export default {
     },
     delete_connection: function(connection) {
       let query_msg = {
-        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1/delete",
+        "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-connections/0.1/delete",
         "connection_id": connection.connection_id,
       };
       this.send_message(query_msg);
     },
     recieve_invitation: function() {
       let receive_invite_msg = {
-        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1/receive-invitation",
+        "@type": "https://github.com/hyperledger/aries-toolbox/tree/master/docs/admin-connections/0.1/receive-invitation",
         "invitation": this.invitation,
         "accept": "auto"
       };
